@@ -1,4 +1,4 @@
-# JPA/EclipseLink Project - OneToMany Bidirectional Relationship
+# JPA- OneToMany Bidirectional Relationship
 
 ## JPA @OneToMany - Bidirectional
 
