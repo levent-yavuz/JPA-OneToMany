@@ -116,7 +116,7 @@ public class Player {
   ```
   ## App Class and Output
   ```java
-  //Entity manager
+ 	//Entity manager
 	EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPAOneToManyUnit");
 	EntityManager entityManager = entityManagerFactory.createEntityManager();
 	
@@ -126,6 +126,7 @@ public class Player {
 		
 	System.out.println("Teams");
 	teamRepository.getAllTeams().stream().forEach(System.out::println);
+
 	System.out.println("Players");
 	playerRepository.getAllPlayers().stream().forEach(System.out::println);
 		
@@ -148,8 +149,8 @@ public class Player {
 	playerRepository.getAllPlayers().stream().forEach(System.out::println);
 		
 	//Close the entity manager and associated factory
-        entityManager.close();
-        entityManagerFactory.close();
+	entityManager.close();
+	entityManagerFactory.close();
   ```
   ```
   Teams
