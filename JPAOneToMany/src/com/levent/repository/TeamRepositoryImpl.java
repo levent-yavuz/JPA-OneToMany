@@ -71,14 +71,13 @@ public class TeamRepositoryImpl implements TeamRepository {
 	@Override
 	public void updateTeamName(int id, String name) {
 		
-		Team t = findTeamById(id);
-		
 		entityManager.getTransaction().begin();
 		
 		Query updateQuery = entityManager.createQuery("Update Team t Set t.name = :p1 Where t.id = :p2", Team.class).setParameter("p1", name)
 				.setParameter("p2",id);
 		updateQuery.executeUpdate();
 		
+		Team t = findTeamById(id);
 		t.getPlayers().forEach( p -> {
 			p.getTeam().setName(name);
 		});

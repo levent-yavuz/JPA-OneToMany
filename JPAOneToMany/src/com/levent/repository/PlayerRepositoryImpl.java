@@ -68,7 +68,6 @@ public class PlayerRepositoryImpl implements PlayerRepository{
 	@Override
 	public void updatePlayerName(int id, String name) {
 		
-		
 		entityManager.getTransaction().begin();
 		
 		Query updateQuery = entityManager.createQuery("Update Player p Set p.name =:p1 where p.id =:p2",Player.class);
@@ -81,7 +80,6 @@ public class PlayerRepositoryImpl implements PlayerRepository{
 		
 		player.getTeam().getPlayers().remove(findPlayerById(id));
 		player.getTeam().getPlayers().add(player);
-
 		
 		entityManager.getTransaction().commit();
 	}
