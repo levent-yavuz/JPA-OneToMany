@@ -1,3 +1,7 @@
+#### Other JPA Projects:
+- [JPA-OneToOne](https://github.com/levent-yavuz/JPA-OneToOne)
+- [JPA-ManyToMany](https://github.com/levent-yavuz/JPA-ManyToMany)
+
 # JPA- OneToMany Bidirectional Relationship
 
 ## JPA @OneToMany - Bidirectional
@@ -24,7 +28,7 @@ LAZY = fetch when needed
 EAGER = fetch immediately
 ```
 We have two entities as Team and Player.
-```
+```java
 public class Team {
  private int id;
  private String name;
@@ -37,7 +41,7 @@ The opposite of lazy loading, which defers initialization of an object until the
 Eager loading initializes an object upon creation. So in the Team and List<Player> example -> all players are fetched while Team is fetched from the database.
 
 ## Team Class
-```
+```java
 @Entity
 public class Team {
 	
@@ -53,7 +57,7 @@ public class Team {
 	private Set<Player> players = new HashSet<>();
 ```
 ## Player Class
-```
+```java
 @Entity
 public class Player {
 
@@ -72,7 +76,7 @@ public class Player {
 	private Team team = new Team();
  ``` 
   ## Player Repository - Update and Delete Methods
-  ```
+  ```java
   	@Override
 	public void updatePlayerName(int id, String name) {
 		
@@ -111,39 +115,39 @@ public class Player {
 	}
   ```
   ## App Class and Output
-  ```
+  ```java
   //Entity manager
-		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPAOneToManyUnit");
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
+	EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPAOneToManyUnit");
+	EntityManager entityManager = entityManagerFactory.createEntityManager();
 	
-		TeamRepository teamRepository = new TeamRepositoryImpl(entityManager);
-		PlayerRepository playerRepository = new PlayerRepositoryImpl(entityManager);	
-		playerRepository.prepareData();
+	TeamRepository teamRepository = new TeamRepositoryImpl(entityManager);
+	PlayerRepository playerRepository = new PlayerRepositoryImpl(entityManager);	
+	playerRepository.prepareData();
 		
-		System.out.println("Teams");
-		teamRepository.getAllTeams().stream().forEach(System.out::println);
-		System.out.println("Players");
-		playerRepository.getAllPlayers().stream().forEach(System.out::println);
+	System.out.println("Teams");
+	teamRepository.getAllTeams().stream().forEach(System.out::println);
+	System.out.println("Players");
+	playerRepository.getAllPlayers().stream().forEach(System.out::println);
 		
-		System.out.println("\nThe player with the specified (ID = 2) is deleting..");
-		playerRepository.deletePlayer(2);
+	System.out.println("\nThe player with the specified (ID = 2) is deleting..");
+	playerRepository.deletePlayer(2);
 		
-		System.out.println("\nThe team with the specified (ID = 1) is deleting..");
-		teamRepository.deleteTeam(1);
+	System.out.println("\nThe team with the specified (ID = 1) is deleting..");
+	teamRepository.deleteTeam(1);
 		
-		System.out.println("The player's name (the specified ID = 5) is updating to 'Test Player'..");
-		playerRepository.updatePlayerName(5, "Test Player");
+	System.out.println("The player's name (the specified ID = 5) is updating to 'Test Player'..");
+	playerRepository.updatePlayerName(5, "Test Player");
 		
-		System.out.println("The team's name (the specified ID = 4) is updating to 'Test FC'..");
-		teamRepository.updateTeamName(4, "Test FC");
+	System.out.println("The team's name (the specified ID = 4) is updating to 'Test FC'..");
+	teamRepository.updateTeamName(4, "Test FC");
 		
-		System.out.println("\nAll Teams After Delete and Update Operation");
-		teamRepository.getAllTeams().stream().forEach(System.out::println);
+	System.out.println("\nAll Teams After Delete and Update Operation");
+	teamRepository.getAllTeams().stream().forEach(System.out::println);
 		
-		System.out.println("\nAll Teams After Delete and Update Operation");
-		playerRepository.getAllPlayers().stream().forEach(System.out::println);
+	System.out.println("\nAll Teams After Delete and Update Operation");
+	playerRepository.getAllPlayers().stream().forEach(System.out::println);
 		
-		//Close the entity manager and associated factory
+	//Close the entity manager and associated factory
         entityManager.close();
         entityManagerFactory.close();
   ```
